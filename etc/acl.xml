@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="ECInternet_Base::base" title="ECInternet Extensions" sortOrder="51">
+					<resource id="ECInternet_Base::menu" title="ECInternet Base" sortOrder="1">
+						<resource id="ECInternet_Base::settings" title="Settings" sortOrder="2" />
+					</resource>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

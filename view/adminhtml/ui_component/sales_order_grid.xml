@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<!-- Add 'customer_number' attribute to Sales Order Listing -->
+	<columns name="sales_order_columns">
+		<column name="customer_number" class="ECInternet\Base\Ui\Component\Listing\Column\CustomerNumber">
+			<settings>
+				<label translate="true">Customer Number</label>
+				<visible>true</visible>
+				<sortable>false</sortable>
+			</settings>
+		</column>
+	</columns>
+</listing>
