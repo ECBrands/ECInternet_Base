@@ -13,9 +13,6 @@
 	"autoload": {
 		"files": [
 			"registration.php"
-		],
-		"psr-4": {
-			"ECInternet\\Base\\": "app/code/Esplin/Base/"
-		}
+		]
 	}
 }
