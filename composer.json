@@ -15,7 +15,7 @@
 			"registration.php"
 		],
 		"psr-4": {
-			"ECInternet\\Base\\": ""
+			"ECInternet\\Base\\": "app/code/Esplin/Base/"
 		}
 	}
 }
