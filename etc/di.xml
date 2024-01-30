@@ -5,6 +5,7 @@
 	            type="ECInternet\Base\Model\SyncComplete" />
 
 	<!-- Add CLI Commands -->
+	<!--
 	<type name="Magento\Framework\Console\CommandListInterface">
 		<arguments>
 			<argument name="commands" xsi:type="array">
@@ -12,6 +13,7 @@
 			</argument>
 		</arguments>
 	</type>
+	-->
 
 	<!-- Add fields to Order API response -->
 	<type name="Magento\Sales\Api\OrderRepositoryInterface">
