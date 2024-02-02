@@ -198,6 +198,22 @@ class UpgradeData implements UpgradeDataInterface
             $customerNumberAttribute->save();
         }
 
+        if (version_compare($context->getVersion(), '1.3.4', '<')) {
+            /** @var \Magento\Eav\Model\Entity\Attribute\AbstractAttribute $customerNumberAttribute */
+            $customerNumberAttribute = $this->_eavConfig->getAttribute(
+                Customer::ENTITY,
+                'customer_number'
+            );
+
+            $customerNumberAttribute->setData('is_used_in_grid', 1);
+            $customerNumberAttribute->setData('is_visible_in_grid', 1);
+            $customerNumberAttribute->setData('is_filterable_in_grid', 1);
+            $customerNumberAttribute->setData('is_searchable_in_grid', 1);
+
+            /** @noinspection PhpDeprecationInspection */
+            $customerNumberAttribute->save();
+        }
+
         $installer->endSetup();
     }
 }
