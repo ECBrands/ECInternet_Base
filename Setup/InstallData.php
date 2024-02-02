@@ -51,7 +51,6 @@ class InstallData implements InstallDataInterface
      *
      * @return void
      * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Zend_Validate_Exception
      * @throws \Exception
      */
     public function install(
