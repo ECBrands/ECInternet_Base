@@ -198,7 +198,7 @@ class UpgradeData implements UpgradeDataInterface
             $customerNumberAttribute->save();
         }
 
-        if (version_compare($context->getVersion(), '1.3.4', '<')) {
+        if (version_compare($context->getVersion(), '1.3.5', '<')) {
             /** @var \Magento\Eav\Model\Entity\Attribute\AbstractAttribute $customerNumberAttribute */
             $customerNumberAttribute = $this->_eavConfig->getAttribute(
                 Customer::ENTITY,
