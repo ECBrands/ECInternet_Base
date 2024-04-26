@@ -20,7 +20,7 @@
 	},
 	"extra": {
 		"installer-paths": {
-			"app/code/ECInternet/Base/": ["ecinternet/base"]
+			"app/code/ECInternet/Base": ["ecinternet/base"]
 		}
 	}
 }
