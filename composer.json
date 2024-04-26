@@ -21,7 +21,7 @@
 	},
 	"extra": {
 		"map": [
-			["app/code/ECInternet/Base", "ECInternet_Base"]
+			["*", "ECInternet/Base"]
 		]
 	}
 }
