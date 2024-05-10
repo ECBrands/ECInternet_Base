@@ -16,7 +16,7 @@ use Magento\Ui\Component\Listing\Columns\Column;
 use Exception;
 
 /**
- * CustomerNumber Column
+ * CustomerNumber column for sales_order_grid
  */
 class CustomerNumber extends Column
 {
@@ -61,18 +61,33 @@ class CustomerNumber extends Column
     {
         if (isset($dataSource['data']['items'])) {
             foreach ($dataSource['data']['items'] as &$item) {
-                /** @var \Magento\Sales\Api\Data\OrderInterface $order */
-                $order = $this->_orderRepository->get($item['entity_id']);
+                if (isset($item['entity_id'])) {
+                    $entityId = $item['entity_id'];
+                    if (is_numeric($entityId)) {
+                        if ($order = $this->getOrderById((int)$entityId)) {
+                            // Extract customer_number
+                            $customerNumber = $this->getCustomerNumber($order);
 
-                // Extract customer_number
-                $customerNumber = $this->getCustomerNumber($order);
-
-                // Assign to item
-                $item[$this->getData('name')] = $customerNumber;
+                            // Assign to item
+                            $item[$this->getData('name')] = $customerNumber;
+                        }
+                    }
+                }
             }
         }
 
         return $dataSource;
+    }
+
+    private function getOrderById(int $orderId)
+    {
+        try {
+            return $this->_orderRepository->get($orderId);
+        } catch (Exception $e) {
+            error_log("Unable to lookup order by id [$orderId]: {$e->getMessage()}");
+        }
+
+        return null;
     }
 
     /**
@@ -86,10 +101,11 @@ class CustomerNumber extends Column
         OrderInterface $order
     ) {
         if ($customerId = $order->getCustomerId()) {
-            /** @noinspection PhpCastIsUnnecessaryInspection */
-            if ($customer = $this->getCustomer((int)$customerId)) {
-                if ($customerNumber = $customer->getCustomAttribute('customer_number')) {
-                    return $customerNumber->getValue();
+            if (is_numeric($customerId)) {
+                if ($customer = $this->getCustomerById((int)$customerId)) {
+                    if ($customerNumber = $customer->getCustomAttribute('customer_number')) {
+                        return $customerNumber->getValue();
+                    }
                 }
             }
         }
@@ -104,12 +120,12 @@ class CustomerNumber extends Column
      *
      * @return \Magento\Customer\Api\Data\CustomerInterface|null
      */
-    private function getCustomer(int $customerId)
+    private function getCustomerById(int $customerId)
     {
         try {
             return $this->_customerRepository->getById($customerId);
         } catch (Exception $e) {
-            error_log("Unable to lookup customer by id: {$e->getMessage()}");
+            error_log("Unable to lookup customer by id [$customerId]: {$e->getMessage()}");
         }
 
         return null;
