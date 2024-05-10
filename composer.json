@@ -2,9 +2,17 @@
 	"name": "ecinternet/base",
 	"description": "EC Internet Base",
 	"type": "magento2-module",
-	"extra": {
-		"map": [
-			["*", "ECInternet/Base"]
-		]
+	"version": "1.3.2.0",
+	"license": [
+		"OSL-3.0",
+		"AFL-3.0"
+	],
+	"autoload": {
+		"files": [
+			"registration.php"
+		],
+		"psr-4": {
+			"ECInternet\\Base\\": ""
+		}
 	}
 }
