@@ -11,19 +11,19 @@
 
 		<add id="ECInternet_Base::menu"
 		     title="Base"
-			 translate="title"
+		     translate="title"
 		     module="ECInternet_Base"
 		     parent="ECInternet_Base::base"
-			 sortOrder="10"
+		     sortOrder="10"
 		     resource="ECInternet_Base::menu"
 		/>
 
 		<add id="ECInternet_Base::settings"
 		     title="Settings"
-			 translate="title"
+		     translate="title"
 		     module="ECInternet_Base"
 		     parent="ECInternet_Base::menu"
-			 sortOrder="10"
+		     sortOrder="10"
 		     action="adminhtml/system_config/edit/section/base"
 		     resource="ECInternet_Base::settings"
 		/>
