@@ -1,14 +1,14 @@
 # Magento2 Module ECInternet Base
 ``ecinternet/base - 1.3.4.0``
 
-- [Requirements](#requirements-header)
-- [Overview](#overview-header)
-- [Installation](#installation-header)
-- [Configuration](#configuration-header)
-- [Specifications](#specifications-header)
-- [Attributes](#attributes-header)
-- [Notes](#notes-header)
-- [Version History](#version-history-header)
+- [Requirements](#requirements)
+- [Overview](#overview)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Specifications](#specifications)
+- [Attributes](#attributes)
+- [Notes](#notes)
+- [Version History](#version-history)
 
 ## Requirements
 
