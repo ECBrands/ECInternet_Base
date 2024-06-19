@@ -48,8 +48,11 @@ class CustomerNumber extends AbstractBackend
 
         // This value will be trim()'d, so it cannot be null
         if ($value !== null) {
-            if (!$entity->checkAttributeUniqueValue($attribute, $object)) {
-                throw new CouldNotSaveException(__("Customer has non-unique 'customer_number' value"));
+            // We don't want blanks to be dupes
+            if (trim($value) !== '') {
+                if (!$entity->checkAttributeUniqueValue($attribute, $object)) {
+                    throw new CouldNotSaveException(__("Customer has non-unique 'customer_number' value"));
+                }
             }
         }
     }
