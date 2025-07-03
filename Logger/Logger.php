@@ -8,14 +8,15 @@ declare(strict_types=1);
 namespace ECInternet\Base\Logger;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Monolog\DateTimeImmutable;
+use Monolog\Level;
+use Monolog\JsonSerializableDateTimeImmutable;
 
 /**
  * Logger channel
  */
 class Logger extends \Monolog\Logger
 {
-    const CONFIG_PATH_DEBUG_LOGGING = 'base/general/debug_logging';
+    private const CONFIG_PATH_DEBUG_LOGGING = 'base/general/debug_logging';
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
@@ -41,7 +42,7 @@ class Logger extends \Monolog\Logger
         $this->config = $config;
     }
 
-    public function addRecord(int $level, string $message, array $context = [], DateTimeImmutable $datetime = null): bool
+    public function addRecord(Level|int $level, string $message, array $context = [], JsonSerializableDateTimeImmutable|null $datetime = null): bool
     {
         if (!$this->config->isSetFlag(self::CONFIG_PATH_DEBUG_LOGGING)) {
             return false;
