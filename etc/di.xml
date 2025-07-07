@@ -21,13 +21,12 @@
 		        type="ECInternet\Base\Plugin\Sales\Api\OrderRepositoryInterfacePlugin" />
 	</type>
 
-	<!-- Custom Logger -->
-	<type name="ECInternet\Base\Logger\Logger">
+	<!-- Custom Logger - Must be injected into each class which needs it -->
+	<virtualType name="ECInternetBaseLogger" type="Magento\Framework\Logger\Monolog">
 		<arguments>
-			<argument name="name" xsi:type="string">Base</argument>
 			<argument name="handlers" xsi:type="array">
 				<item name="system" xsi:type="object">ECInternet\Base\Logger\Handler</item>
 			</argument>
 		</arguments>
-	</type>
+	</virtualType>
 </config>
