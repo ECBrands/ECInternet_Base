@@ -53,6 +53,27 @@ class ExtensionInstallTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(['adminhtml_customer'], $attribute->getUsedInForms(), 'Customer attribute "customer_number" should be used in adminhtml_customer form.');
     }
 
+    public function testCustomerAddressAttributeWasCreatedCorrectly()
+    {
+        /** @var \Magento\Eav\Model\Entity\Attribute\AbstractAttribute $attribute */
+        $attribute = $this->getAttribute('customer_address', 'ship_to_id');
+        if ($attribute === null) {
+            $this->fail('CustomerAddress attribute "ship_to_id" does not exist.');
+        }
+
+        $this->assertNotNull($attribute, 'CustomerAddress attribute "customer_number" should exist.');
+        $this->assertEquals('varchar', $attribute->getBackendType(), 'CustomerAddress attribute "ship_to_id" should have backend type "varchar".');
+        $this->assertEquals('Ship-To Id', $attribute->getStoreLabel(), 'CustomerAddress attribute "ship_to_id" should have store label "Ship-To Id".');
+        $this->assertEquals('text', $attribute->getFrontendInput(), 'CustomerAddress attribute "ship_to_id" should have frontend input type "text".');
+        $this->assertEquals(0, $attribute->getIsRequired(), 'CustomerAddress attribute "ship_to_id" should not be required.');
+        $this->assertEquals(1, $attribute->getData('is_visible'), 'CustomerAddress attribute "ship_to_id" should be visible on frontend.');
+        $this->assertEquals(0, $attribute->getIsUserDefined(), 'CustomerAddress attribute "ship_to_id" should not be user defined.');
+        $this->assertEquals(0, $attribute->getIsUnique(), 'CustomerAddress attribute "ship_to_id" should not be unique.');
+        $this->assertEquals(999, $attribute->getData('sort_order'), 'CustomerAddress attribute "ship_to_id" should have position 999.');
+
+        $this->assertEquals(['adminhtml_customer_address'], $attribute->getUsedInForms(), 'CustomerAddress attribute "ship_to_id" should be used in adminhtml_customer_address form.');
+    }
+
     private function getAttribute($entityTypeCode, $attributeCode)
     {
         try {
