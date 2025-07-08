@@ -56,7 +56,11 @@ class ExtensionInstallTest extends \PHPUnit\Framework\TestCase
     private function getAttribute($entityTypeCode, $attributeCode)
     {
         try {
-            return $this->eavConfig->getAttribute($entityTypeCode, $attributeCode);
+            if ($attribute = $this->eavConfig->getAttribute($entityTypeCode, $attributeCode)) {
+                if ($attribute->getAttributeId()) {
+                    return $attribute;
+                }
+            }
         } catch (Exception) {
         }
 
