@@ -15,34 +15,34 @@ use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderSearchResultInterface;
 use Magento\Sales\Api\OrderAddressRepositoryInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
-use ECInternet\Base\Logger\Logger;
+use Psr\Log\LoggerInterface;
 
 /**
  * Plugin for Magento\Sales\Api\OrderRepositoryInterface
  */
 class OrderRepositoryInterfacePlugin
 {
-    const FIELD_NAME = 'ship_to_id';
+    private const FIELD_NAME = 'ship_to_id';
 
     /**
      * @var \Magento\Customer\Api\AddressRepositoryInterface
      */
-    private $_addressRepository;
+    private $addressRepository;
 
     /**
      * @var \Magento\Sales\Api\Data\OrderExtensionFactory
      */
-    private $_orderExtensionFactory;
+    private $orderExtensionFactory;
 
     /**
      * @var \Magento\Sales\Api\OrderAddressRepositoryInterface
      */
-    private $_orderAddressRepository;
+    private $orderAddressRepository;
 
     /**
-     * @var \ECInternet\Base\Logger\Logger
+     * @var \Psr\Log\LoggerInterface
      */
-    private $_logger;
+    private $logger;
 
     /**
      * OrderRepositoryInterfacePlugin constructor.
@@ -50,18 +50,18 @@ class OrderRepositoryInterfacePlugin
      * @param \Magento\Customer\Api\AddressRepositoryInterface   $addressRepository
      * @param \Magento\Sales\Api\Data\OrderExtensionFactory      $orderExtensionFactory
      * @param \Magento\Sales\Api\OrderAddressRepositoryInterface $orderAddressRepository
-     * @param \ECInternet\Base\Logger\Logger                     $logger
+     * @param \Psr\Log\LoggerInterface                           $logger
      */
     public function __construct(
         AddressRepositoryInterface $addressRepository,
         OrderExtensionFactory $orderExtensionFactory,
         OrderAddressRepositoryInterface $orderAddressRepository,
-        Logger $logger
+        LoggerInterface $logger
     ) {
-        $this->_addressRepository      = $addressRepository;
-        $this->_orderExtensionFactory  = $orderExtensionFactory;
-        $this->_orderAddressRepository = $orderAddressRepository;
-        $this->_logger                 = $logger;
+        $this->addressRepository      = $addressRepository;
+        $this->orderExtensionFactory  = $orderExtensionFactory;
+        $this->orderAddressRepository = $orderAddressRepository;
+        $this->logger                 = $logger;
     }
 
     /**
@@ -114,7 +114,7 @@ class OrderRepositoryInterfacePlugin
         $extensionAttributes = $order->getExtensionAttributes();
 
         /** @var \Magento\Sales\Api\Data\OrderExtension $orderExtension */
-        $orderExtension = $extensionAttributes ?: $this->_orderExtensionFactory->create();
+        $orderExtension = $extensionAttributes ?: $this->orderExtensionFactory->create();
 
         if ($shippingAddressId = $order->getData('shipping_address_id')) {
             /** @var \Magento\Sales\Model\Order\Address $orderAddress */
@@ -148,7 +148,7 @@ class OrderRepositoryInterfacePlugin
     private function getOrderAddress(int $orderAddressId)
     {
         try {
-            return $this->_orderAddressRepository->get($orderAddressId);
+            return $this->orderAddressRepository->get($orderAddressId);
         } /** @noinspection PhpRedundantCatchClauseInspection */ catch (NoSuchEntityException $e) {
             $this->log('getOrderAddress()', ['orderAddressId' => $orderAddressId, 'exception' => $e->getMessage()]);
         }
@@ -166,7 +166,7 @@ class OrderRepositoryInterfacePlugin
     private function getAddress(int $addressId)
     {
         try {
-            return $this->_addressRepository->getById($addressId);
+            return $this->addressRepository->getById($addressId);
         } catch (LocalizedException $e) {
             $this->log('getAddress()', ['addressId' => $addressId, 'error' => $e->getMessage()]);
         }
@@ -182,6 +182,6 @@ class OrderRepositoryInterfacePlugin
      */
     private function log(string $message, array $extra = [])
     {
-        $this->_logger->info('Plugin/Sales/Api/OrderRepositoryInterfacePlugin - ' . $message, $extra);
+        $this->logger->info('Plugin/Sales/Api/OrderRepositoryInterfacePlugin - ' . $message, $extra);
     }
 }
