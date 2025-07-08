@@ -150,7 +150,7 @@ class OrderRepositoryInterfacePlugin
         try {
             return $this->_orderAddressRepository->get($orderAddressId);
         } /** @noinspection PhpRedundantCatchClauseInspection */ catch (NoSuchEntityException $e) {
-            $this->log("Unable to get OrderAddress [$orderAddressId]. - {$e->getMessage()}.");
+            $this->log('getOrderAddress()', ['orderAddressId' => $orderAddressId, 'exception' => $e->getMessage()]);
         }
 
         return null;
