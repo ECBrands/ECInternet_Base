@@ -168,7 +168,7 @@ class OrderRepositoryInterfacePlugin
         try {
             return $this->addressRepository->getById($addressId);
         } catch (LocalizedException $e) {
-            $this->log('getAddress()', ['addressId' => $addressId, 'error' => $e->getMessage()]);
+            $this->log('getAddress()', ['addressId' => $addressId, 'exception' => $e->getMessage()]);
         }
 
         return null;
