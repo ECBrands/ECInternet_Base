@@ -7,11 +7,17 @@
 		        type="ECInternet\Base\Plugin\Sales\Api\OrderRepositoryInterfacePlugin" />
 	</type>
 
+	<type name="ECInternet\Base\Plugin\Sales\Api\OrderRepositoryInterfacePlugin">
+		<arguments>
+			<argument name="logger" xsi:type="object">ECInternetBaseLogger</argument>
+		</arguments>
+	</type>
+
 	<!-- Custom Logger - Must be injected into each class which needs it -->
 	<virtualType name="ECInternetBaseLogger" type="Magento\Framework\Logger\Monolog">
 		<arguments>
 			<argument name="handlers" xsi:type="array">
-				<item name="system" xsi:type="object">ECInternet\Base\Logger\Handler</item>
+				<item name="info" xsi:type="object">ECInternet\Base\Logger\Handler</item>
 			</argument>
 		</arguments>
 	</virtualType>
