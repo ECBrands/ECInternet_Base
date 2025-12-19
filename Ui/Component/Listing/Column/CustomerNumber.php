@@ -23,12 +23,12 @@ class CustomerNumber extends Column
     /**
      * @var \Magento\Customer\Api\CustomerRepositoryInterface
      */
-    private $_customerRepository;
+    private $customerRepository;
 
     /**
      * @var \Magento\Sales\Api\OrderRepositoryInterface
      */
-    private $_orderRepository;
+    private $orderRepository;
 
     /**
      * CustomerNumber constructor.
@@ -50,13 +50,10 @@ class CustomerNumber extends Column
     ) {
         parent::__construct($context, $uiComponentFactory, $components, $data);
 
-        $this->_customerRepository = $customerRepository;
-        $this->_orderRepository    = $orderRepository;
+        $this->customerRepository = $customerRepository;
+        $this->orderRepository    = $orderRepository;
     }
 
-    /**
-     * @inheritDoc
-     */
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
@@ -82,7 +79,7 @@ class CustomerNumber extends Column
     private function getOrderById(int $orderId)
     {
         try {
-            return $this->_orderRepository->get($orderId);
+            return $this->orderRepository->get($orderId);
         } catch (Exception $e) {
             error_log("Unable to lookup order by id [$orderId]: {$e->getMessage()}");
         }
@@ -123,7 +120,7 @@ class CustomerNumber extends Column
     private function getCustomerById(int $customerId)
     {
         try {
-            return $this->_customerRepository->getById($customerId);
+            return $this->customerRepository->getById($customerId);
         } catch (Exception $e) {
             error_log("Unable to lookup customer by id [$customerId]: {$e->getMessage()}");
         }
