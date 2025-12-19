@@ -22,12 +22,12 @@ class InstallData implements InstallDataInterface
     /**
      * @var \Magento\Eav\Model\Config
      */
-    private $_eavConfig;
+    private $eavConfig;
 
     /**
      * @var \Magento\Eav\Setup\EavSetupFactory
      */
-    private $_eavSetupFactory;
+    private $eavSetupFactory;
 
     /**
      * InstallData constructor.
@@ -39,8 +39,8 @@ class InstallData implements InstallDataInterface
         Config $eavConfig,
         EavSetupFactory $eavSetupFactory
     ) {
-        $this->_eavConfig       = $eavConfig;
-        $this->_eavSetupFactory = $eavSetupFactory;
+        $this->eavConfig       = $eavConfig;
+        $this->eavSetupFactory = $eavSetupFactory;
     }
 
     /**
@@ -58,7 +58,7 @@ class InstallData implements InstallDataInterface
         ModuleContextInterface $context
     ) {
         /** @var \Magento\Eav\Setup\EavSetup $eavSetup */
-        $eavSetup = $this->_eavSetupFactory->create(['setup' => $setup]);
+        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
         $eavSetup->addAttribute(
             Customer::ENTITY,
             'customer_number',
@@ -75,7 +75,7 @@ class InstallData implements InstallDataInterface
         );
 
         /** @var \Magento\Eav\Model\Entity\Attribute\AbstractAttribute $customerNumberAttribute */
-        $customerNumberAttribute = $this->_eavConfig->getAttribute(
+        $customerNumberAttribute = $this->eavConfig->getAttribute(
             Customer::ENTITY,
             'customer_number'
         );
@@ -85,7 +85,6 @@ class InstallData implements InstallDataInterface
             ['adminhtml_customer']
         );
 
-        /** @noinspection PhpDeprecationInspection */
         $customerNumberAttribute->save();
     }
 }

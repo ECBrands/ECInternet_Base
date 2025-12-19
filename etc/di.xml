@@ -1,20 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-	<preference for="ECInternet\Base\Api\SyncCompleteInterface"
-	            type="ECInternet\Base\Model\SyncComplete" />
-
-	<!-- Add CLI Commands -->
-	<!--
-	<type name="Magento\Framework\Console\CommandListInterface">
-		<arguments>
-			<argument name="commands" xsi:type="array">
-				<item name="ecinternet_productimagesfix" xsi:type="object">ECInternet\Base\Console\Command\ProductImagesFixCommand</item>
-			</argument>
-		</arguments>
-	</type>
-	-->
-
 	<!-- Add fields to Order API response -->
 	<type name="Magento\Sales\Api\OrderRepositoryInterface">
 		<plugin name="ecinternet_base-sales_api_orderrepositoryinterface"
