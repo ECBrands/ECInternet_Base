@@ -22,27 +22,27 @@ use ECInternet\Base\Logger\Logger;
  */
 class OrderRepositoryInterfacePlugin
 {
-    const FIELD_NAME = 'ship_to_id';
+    private const FIELD_NAME = 'ship_to_id';
 
     /**
      * @var \Magento\Customer\Api\AddressRepositoryInterface
      */
-    private $_addressRepository;
+    private $addressRepository;
 
     /**
      * @var \Magento\Sales\Api\Data\OrderExtensionFactory
      */
-    private $_orderExtensionFactory;
+    private $orderExtensionFactory;
 
     /**
      * @var \Magento\Sales\Api\OrderAddressRepositoryInterface
      */
-    private $_orderAddressRepository;
+    private $orderAddressRepository;
 
     /**
      * @var \ECInternet\Base\Logger\Logger
      */
-    private $_logger;
+    private $logger;
 
     /**
      * OrderRepositoryInterfacePlugin constructor.
@@ -58,10 +58,10 @@ class OrderRepositoryInterfacePlugin
         OrderAddressRepositoryInterface $orderAddressRepository,
         Logger $logger
     ) {
-        $this->_addressRepository      = $addressRepository;
-        $this->_orderExtensionFactory  = $orderExtensionFactory;
-        $this->_orderAddressRepository = $orderAddressRepository;
-        $this->_logger                 = $logger;
+        $this->addressRepository      = $addressRepository;
+        $this->orderExtensionFactory  = $orderExtensionFactory;
+        $this->orderAddressRepository = $orderAddressRepository;
+        $this->logger                 = $logger;
     }
 
     /**
@@ -114,7 +114,7 @@ class OrderRepositoryInterfacePlugin
         $extensionAttributes = $order->getExtensionAttributes();
 
         /** @var \Magento\Sales\Api\Data\OrderExtension $orderExtension */
-        $orderExtension = $extensionAttributes ?: $this->_orderExtensionFactory->create();
+        $orderExtension = $extensionAttributes ?: $this->orderExtensionFactory->create();
 
         if ($shippingAddressId = $order->getData('shipping_address_id')) {
             /** @var \Magento\Sales\Model\Order\Address $orderAddress */
@@ -148,9 +148,9 @@ class OrderRepositoryInterfacePlugin
     private function getOrderAddress(int $orderAddressId)
     {
         try {
-            return $this->_orderAddressRepository->get($orderAddressId);
+            return $this->orderAddressRepository->get($orderAddressId);
         } /** @noinspection PhpRedundantCatchClauseInspection */ catch (NoSuchEntityException $e) {
-            $this->log("Unable to get OrderAddress [$orderAddressId]. - {$e->getMessage()}.");
+            $this->log('getOrderAddress()', ['orderAddressId' => $orderAddressId, 'exception' => $e->getMessage()]);
         }
 
         return null;
@@ -166,9 +166,9 @@ class OrderRepositoryInterfacePlugin
     private function getAddress(int $addressId)
     {
         try {
-            return $this->_addressRepository->getById($addressId);
+            return $this->addressRepository->getById($addressId);
         } catch (LocalizedException $e) {
-            $this->log('getAddress()', ['addressId' => $addressId, 'error' => $e->getMessage()]);
+            $this->log('getAddress()', ['addressId' => $addressId, 'exception' => $e->getMessage()]);
         }
 
         return null;
@@ -182,6 +182,6 @@ class OrderRepositoryInterfacePlugin
      */
     private function log(string $message, array $extra = [])
     {
-        $this->_logger->info('Plugin/Sales/Api/OrderRepositoryInterfacePlugin - ' . $message, $extra);
+        $this->logger->info('Plugin/Sales/Api/OrderRepositoryInterfacePlugin - ' . $message, $extra);
     }
 }
