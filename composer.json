@@ -2,7 +2,7 @@
 	"name": "ecinternet/base",
 	"description": "EC Internet Base",
 	"require": {
-		"php": "~8.2.0||~8.3.0",
+		"php": "^8.2||^8.3",
 		"monolog/monolog": "^3.0"
 	},
 	"type": "magento2-module",
