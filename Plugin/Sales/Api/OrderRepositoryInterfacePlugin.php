@@ -182,6 +182,6 @@ class OrderRepositoryInterfacePlugin
      */
     private function log(string $message, array $extra = [])
     {
-        $this->logger->info('Plugin/Sales/Api/OrderRepositoryInterfacePlugin - ' . $message, $extra);
+        $this->logger->info('ECInternet_Base - Plugin/Sales/Api/OrderRepositoryInterfacePlugin - ' . $message, $extra);
     }
 }
