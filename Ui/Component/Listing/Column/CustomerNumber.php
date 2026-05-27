@@ -14,6 +14,7 @@ use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Ui\Component\Listing\Columns\Column;
 use Exception;
+use Psr\Log\LoggerInterface;
 
 /**
  * CustomerNumber column for sales_order_grid
@@ -31,12 +32,18 @@ class CustomerNumber extends Column
     private $orderRepository;
 
     /**
+     * @var \Psr\Log\LoggerInterface
+     */
+    private $logger;
+
+    /**
      * CustomerNumber constructor.
      *
      * @param \Magento\Customer\Api\CustomerRepositoryInterface            $customerRepository
      * @param \Magento\Framework\View\Element\UiComponent\ContextInterface $context
      * @param \Magento\Framework\View\Element\UiComponentFactory           $uiComponentFactory
      * @param \Magento\Sales\Api\OrderRepositoryInterface                  $orderRepository
+     * @param \Psr\Log\LoggerInterface                                     $logger
      * @param array                                                        $components
      * @param array                                                        $data
      */
@@ -45,6 +52,7 @@ class CustomerNumber extends Column
         ContextInterface $context,
         UiComponentFactory $uiComponentFactory,
         OrderRepositoryInterface $orderRepository,
+        LoggerInterface $logger,
         array $components = [],
         array $data = []
     ) {
@@ -52,6 +60,7 @@ class CustomerNumber extends Column
 
         $this->customerRepository = $customerRepository;
         $this->orderRepository    = $orderRepository;
+        $this->logger             = $logger;
     }
 
     public function prepareDataSource(array $dataSource)
@@ -81,7 +90,7 @@ class CustomerNumber extends Column
         try {
             return $this->orderRepository->get($orderId);
         } catch (Exception $e) {
-            error_log("Unable to lookup order by id [$orderId]: {$e->getMessage()}");
+            $this->log('Unable to lookup order by id', ['customerId' => $orderId, 'exception' => $e]);
         }
 
         return null;
@@ -122,9 +131,20 @@ class CustomerNumber extends Column
         try {
             return $this->customerRepository->getById($customerId);
         } catch (Exception $e) {
-            error_log("Unable to lookup customer by id [$customerId]: {$e->getMessage()}");
+            $this->log('Unable to lookup customer by id', ['customerId' => $customerId, 'exception' => $e]);
         }
 
         return null;
+    }
+
+    /**
+     * Write to extension log.
+     *
+     * @param string $message
+     * @param array  $extra
+     */
+    private function log(string $message, array $extra = [])
+    {
+        $this->logger->info('ECInternet_Base - Ui/Component/Listing/Column/CustomerNumber - ' . $message, $extra);
     }
 }
