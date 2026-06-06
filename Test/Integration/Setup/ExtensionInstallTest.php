@@ -11,8 +11,9 @@ use Magento\Eav\Model\Config as EavConfig;
 use Magento\TestFramework\Helper\Bootstrap;
 use ECInternet\Base\Model\Attribute\Backend\CustomerNumber;
 use Exception;
+use PHPUnit\Framework\TestCase;
 
-class ExtensionInstallTest extends \PHPUnit\Framework\TestCase
+class ExtensionInstallTest extends TestCase
 {
     /**
      * @var \Magento\Eav\Model\Config
@@ -29,11 +30,8 @@ class ExtensionInstallTest extends \PHPUnit\Framework\TestCase
     {
         /** @var \Magento\Eav\Model\Entity\Attribute\AbstractAttribute $attribute */
         $attribute = $this->getAttribute('customer', 'customer_number');
-        if ($attribute === null) {
-            $this->fail('Customer attribute "customer_number" does not exist.');
-        }
 
-        $this->assertNotNull($attribute, 'Customer attribute "customer_number" should exist.');
+        $this->assertNotNull($attribute, 'Customer attribute "customer_number" does not exist.');
         $this->assertEquals('varchar', $attribute->getBackendType(), 'Customer attribute "customer_number" should have backend type "varchar".');
         $this->assertEquals('Customer Number', $attribute->getStoreLabel(), 'Customer attribute "customer_number" should have store label "Customer Number".');
         $this->assertEquals(0, $attribute->getIsRequired(), 'Customer attribute "customer_number" should not be required.');
@@ -57,11 +55,8 @@ class ExtensionInstallTest extends \PHPUnit\Framework\TestCase
     {
         /** @var \Magento\Eav\Model\Entity\Attribute\AbstractAttribute $attribute */
         $attribute = $this->getAttribute('customer_address', 'ship_to_id');
-        if ($attribute === null) {
-            $this->fail('CustomerAddress attribute "ship_to_id" does not exist.');
-        }
 
-        $this->assertNotNull($attribute, 'CustomerAddress attribute "customer_number" should exist.');
+        $this->assertNotNull($attribute, 'CustomerAddress attribute "ship_to_id" does not exist.');
         $this->assertEquals('varchar', $attribute->getBackendType(), 'CustomerAddress attribute "ship_to_id" should have backend type "varchar".');
         $this->assertEquals('Ship-To Id', $attribute->getStoreLabel(), 'CustomerAddress attribute "ship_to_id" should have store label "Ship-To Id".');
         $this->assertEquals('text', $attribute->getFrontendInput(), 'CustomerAddress attribute "ship_to_id" should have frontend input type "text".');
@@ -74,7 +69,11 @@ class ExtensionInstallTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(['adminhtml_customer_address'], $attribute->getUsedInForms(), 'CustomerAddress attribute "ship_to_id" should be used in adminhtml_customer_address form.');
     }
 
-    private function getAttribute($entityTypeCode, $attributeCode)
+    // -------------------------------------------------------------------------
+    // Helpers
+    // -------------------------------------------------------------------------
+
+    private function getAttribute(string $entityTypeCode, string $attributeCode)
     {
         try {
             if ($attribute = $this->eavConfig->getAttribute($entityTypeCode, $attributeCode)) {
