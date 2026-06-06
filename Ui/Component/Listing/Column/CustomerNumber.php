@@ -90,7 +90,7 @@ class CustomerNumber extends Column
         try {
             return $this->orderRepository->get($orderId);
         } catch (Exception $e) {
-            $this->log('Unable to lookup order by id', ['customerId' => $orderId, 'exception' => $e]);
+            $this->log('Unable to lookup order by id', ['orderId' => $orderId, 'exception' => $e]);
         }
 
         return null;
