@@ -56,6 +56,11 @@ class AddCustomerNumberAttributeToCustomer implements DataPatchInterface
         return [];
     }
 
+    /**
+     * @throws \Magento\Framework\Exception\AlreadyExistsException
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Validator\ValidateException
+     */
     public function apply()
     {
         $this->setup->getConnection()->startSetup();
