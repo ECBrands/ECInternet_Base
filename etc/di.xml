@@ -7,6 +7,16 @@
 		        type="ECInternet\Base\Plugin\Sales\Api\OrderRepositoryInterfacePlugin" />
 	</type>
 
+	<!-- Override sales_order_grid collection to join customer_number from EAV -->
+	<!-- This must be defined in etc/di.xml, and not adminhtml to avoid overriding the whole collection map -->
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="sales_order_grid_data_source" xsi:type="string">ECInternet\Base\Model\ResourceModel\Order\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+
 	<!-- Custom Logger -->
 	<type name="ECInternet\Base\Logger\Logger">
 		<arguments>
