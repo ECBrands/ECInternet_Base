@@ -19,6 +19,8 @@ use Psr\Log\LoggerInterface;
 
 /**
  * Plugin for Magento\Sales\Api\OrderRepositoryInterface
+ *
+ * @SuppressWarnings(PHPMD.LongVariable)
  */
 class OrderRepositoryInterfacePlugin
 {
@@ -73,6 +75,7 @@ class OrderRepositoryInterfacePlugin
      * @return \Magento\Sales\Api\Data\OrderInterface
      *
      * @noinspection PhpUnusedParameterInspection
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function afterGet(
         OrderRepositoryInterface $subject,
@@ -90,6 +93,7 @@ class OrderRepositoryInterfacePlugin
      * @return \Magento\Sales\Api\Data\OrderSearchResultInterface
      *
      * @noinspection PhpUnusedParameterInspection
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function afterGetList(
         OrderRepositoryInterface $subject,

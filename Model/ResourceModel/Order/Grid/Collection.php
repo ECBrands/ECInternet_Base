@@ -65,6 +65,8 @@ class Collection extends OrderGridCollection
 
     /**
      * Add customer_number JOIN before filters are rendered so the column is available for filtering.
+     *
+     * @SuppressWarnings(PHPMD.CamelCaseMethodName)
      */
     protected function _renderFiltersBefore()
     {
@@ -102,7 +104,7 @@ class Collection extends OrderGridCollection
 
         try {
             $attribute = $this->eavConfig->getAttribute('customer', self::CUSTOMER_NUMBER_FIELD);
-        } catch (LocalizedException $e) {
+        } catch (LocalizedException) {
             return;
         }
 
