@@ -56,7 +56,7 @@ class Collection extends OrderGridCollection
         EavConfig $eavConfig,
         $mainTable = 'sales_order_grid',
         $resourceModel = Order::class,
-        TimezoneInterface $timeZone = null
+        ?TimezoneInterface $timeZone = null
     ) {
         $this->eavConfig = $eavConfig;
 
