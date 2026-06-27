@@ -5,7 +5,7 @@
  */
 declare(strict_types=1);
 
-namespace ECInternet\Base\Plugin\Sales\Api;
+namespace ECInternet\Base\Plugin\Magento\Sales\Api;
 
 use Magento\Customer\Api\AddressRepositoryInterface;
 use Magento\Framework\Exception\LocalizedException;

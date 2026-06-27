@@ -4,10 +4,11 @@
 	<!-- Add fields to Order API response -->
 	<type name="Magento\Sales\Api\OrderRepositoryInterface">
 		<plugin name="ecinternet_base-sales_api_orderrepositoryinterface"
-		        type="ECInternet\Base\Plugin\Sales\Api\OrderRepositoryInterfacePlugin" />
+		        type="ECInternet\Base\Plugin\Magento\Sales\Api\OrderRepositoryInterfacePlugin" />
 	</type>
 
-	<type name="ECInternet\Base\Plugin\Sales\Api\OrderRepositoryInterfacePlugin">
+	<!-- Add Logger to OrderRepositoryInterfacePlugin -->
+	<type name="ECInternet\Base\Plugin\Magento\Sales\Api\OrderRepositoryInterfacePlugin">
 		<arguments>
 			<argument name="logger" xsi:type="object">ECInternetBaseLogger</argument>
 		</arguments>
