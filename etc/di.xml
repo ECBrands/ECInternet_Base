@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 	<!-- Add fields to Order API response -->
 	<type name="Magento\Sales\Api\OrderRepositoryInterface">
-		<plugin name="ecinternet_base-sales_api_orderrepositoryinterface"
+		<plugin name="ecinternet_base-magento_sales_api_orderrepositoryinterface"
 		        type="ECInternet\Base\Plugin\Magento\Sales\Api\OrderRepositoryInterfacePlugin" />
 	</type>
 
