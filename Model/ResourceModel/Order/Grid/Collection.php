@@ -12,7 +12,6 @@ use Magento\Framework\Data\Collection\Db\FetchStrategyInterface as FetchStrategy
 use Magento\Framework\Data\Collection\EntityFactoryInterface as EntityFactory;
 use Magento\Framework\Event\ManagerInterface as EventManager;
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Sales\Model\ResourceModel\Order;
 use Magento\Sales\Model\ResourceModel\Order\Grid\Collection as OrderGridCollection;
 use Psr\Log\LoggerInterface as Logger;
@@ -46,7 +45,8 @@ class Collection extends OrderGridCollection
      * @param \Magento\Eav\Model\Config                                    $eavConfig
      * @param string                                                       $mainTable
      * @param string                                                       $resourceModel
-     * @param \Magento\Framework\Stdlib\DateTime\TimezoneInterface|null    $timeZone
+     *
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function __construct(
         EntityFactory $entityFactory,
@@ -56,11 +56,10 @@ class Collection extends OrderGridCollection
         EavConfig $eavConfig,
         $mainTable = 'sales_order_grid',
         $resourceModel = Order::class,
-        ?TimezoneInterface $timeZone = null
     ) {
         $this->eavConfig = $eavConfig;
 
-        parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel, $timeZone);
+        parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $mainTable, $resourceModel);
     }
 
     /**
